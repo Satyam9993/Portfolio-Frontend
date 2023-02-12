@@ -1,7 +1,7 @@
 import axios from 'axios';
-const BACKEND_URL = process.env.BACKEND_URL
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-
+console.log("Satyam ", BACKEND_URL);
 const instance = axios.create({
     baseURL: `${BACKEND_URL}/api`,
     timeout: 5000,
