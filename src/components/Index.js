@@ -36,11 +36,11 @@ const Index = ({
 
   useEffect(() => {
     if(localStorage.getItem('authToken')){
-      if((loginUserRedux.loginUserId === UserdataRedux._id) || (loginUserRedux.loginUserName === UserdataRedux.userName)){
-        changeEditSettingAction((loginUserRedux.loginUserId === UserdataRedux._id) && (loginUserRedux.loginUserName === UserdataRedux.userName));
+      if(loginUserRedux.loginUserId && UserdataRedux._id){
+        changeEditSettingAction(loginUserRedux.loginUserId === UserdataRedux._id);
       }
     }
-  }, [loginUserRedux && UserdataRedux])
+  }, [])
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)
