@@ -43,6 +43,14 @@ const Index = ({
       }
     }
   }, [loginUserRedux])
+  
+  useEffect(() => {
+    if(localStorage.getItem('authToken')){
+      if(loginUserRedux.loginUserId && UserdataRedux._id){
+        changeEditSettingAction(loginUserRedux.loginUserId === UserdataRedux._id);
+      }
+    }
+  }, [])
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)
