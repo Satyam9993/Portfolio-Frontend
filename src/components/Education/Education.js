@@ -46,7 +46,6 @@ const Education = ({showAlert, UserdataRedux}) => {
 
 const mapStateToProps = (state) => {
   return {
-    // loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux : state?.Userdata?.User
   };
 };

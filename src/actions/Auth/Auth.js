@@ -1,5 +1,5 @@
 import axiosInstance from "../Axiosinstance";
-import {LOGINUSERID, ENABLEEDIT} from '../type'
+import {LOGINUSERID} from '../type'
 
 export const signinAction = async (body) => {
   const res = await axiosInstance.post("/auth/signin", body);
@@ -39,20 +39,7 @@ export const getloginData = () => async (dispatch) => {
   return res;
 };
 
-export const changeEditSetting = (data) => (dispatch) => {
-  if(data){
-    dispatch({
-      type: ENABLEEDIT,
-      payload: data,
-    });
-  }
-};
-
 export const logout = () => (dispatch) => {
-    dispatch({
-      type: ENABLEEDIT,
-      payload: false,
-    });
     dispatch({
       type: LOGINUSERID,
       payload: {},

@@ -6,7 +6,7 @@ import { editExperience, removeExperience } from "../../actions/Experience/Exper
 import { updateUserData } from "../../actions/UserData/userdata";
 
 const EditExperience = ({
-  editPermissionRedux,
+  loginUserRedux,
   exp,
   UserdataRedux,
   updateUserDataAction,
@@ -53,7 +53,7 @@ const EditExperience = ({
       showAlert("Description is too short", "danger");
       return;
     }
-    if (selectedFile && editPermissionRedux) {
+    if (selectedFile && (loginUserRedux.loginUserId === UserdataRedux._id)) {
       const imageRef = ref(storage, `images/experience/${exp._id}`);
       await uploadBytes(imageRef, selectedFile)
         .then((snapshort) => {
@@ -70,6 +70,7 @@ const EditExperience = ({
                 if (res) {
                   handleCloseModal();
                   await updateUserDataAction(UserdataRedux._id);
+                  showAlert("Successfully Updated", "success");
                 }
               })
               .catch((err) => {
@@ -92,6 +93,7 @@ const EditExperience = ({
           if (res) {
             handleCloseModal();
             await updateUserDataAction(UserdataRedux._id);
+            showAlert("Successfully Updated", "success");
           }
         })
         .catch((err) => {
@@ -114,10 +116,11 @@ const EditExperience = ({
           .then(async (res) => {
             if (res) {
               await updateUserDataAction(UserdataRedux._id);
+              showAlert("Successfully Removed", "success");
             }
           })
           .catch((err) => {
-            // Alert
+            showAlert("Something went wrong try again!", "danger");
           });
     }
   };
@@ -137,7 +140,7 @@ const EditExperience = ({
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-md bg-white hover:text-blue-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -160,7 +163,7 @@ const EditExperience = ({
           </span>
         </button>
       )}
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:text-red-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
           onClick={handleRemove}
@@ -339,7 +342,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

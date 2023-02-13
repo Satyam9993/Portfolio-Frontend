@@ -4,15 +4,7 @@ import ExperienceCard from "./ExperienceCard";
 import AddExperience from "./AddExperience";
 
 const Experience = ({ UserdataRedux, showAlert }) => {
-  const [experience, setExperience] = useState([
-    // {
-    //   type: "Internship",
-    //   companyName: "Hubx.ai",
-    //   role : "Full Stack Junior Devloper",
-    //   certificateurl: "url",
-    //   description: "Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.",
-    // },
-  ]);
+  const [experience, setExperience] = useState([]);
 
   useEffect(() => {
     if (UserdataRedux?.experience) {
@@ -52,8 +44,6 @@ const Experience = ({ UserdataRedux, showAlert }) => {
   );
 };
 
-const mapDispatchToProps = {};
-
 const mapStateToProps = (state) => {
   return {
     editPermissionRedux: state?.loginuser?.editPermission,
@@ -62,4 +52,4 @@ const mapStateToProps = (state) => {
     
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Experience);
+export default connect(mapStateToProps, null)(Experience);

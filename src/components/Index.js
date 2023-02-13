@@ -12,7 +12,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 
 import {getUserDataByName} from '../actions/UserData/userdata'
-import {getloginData, changeEditSetting} from '../actions/Auth/Auth'
+import {getloginData} from '../actions/Auth/Auth'
 
 
 const Index = ({
@@ -33,14 +33,6 @@ const Index = ({
       getloginDataAction()
     }
   }, [])
-
-  useEffect(() => {
-    if(localStorage.getItem('authToken')){
-      if((loginUserRedux.loginUserId === UserdataRedux._id) || (loginUserRedux.loginUserName === UserdataRedux.userName)){
-        changeEditSettingAction((loginUserRedux.loginUserId === UserdataRedux._id) && (loginUserRedux.loginUserName === UserdataRedux.userName));
-      }
-    }
-  }, [loginUserRedux && UserdataRedux])
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)
@@ -72,8 +64,7 @@ const Index = ({
 
 const mapDispatchToProps = {
   getUserDataByNameAction : getUserDataByName,
-  getloginDataAction : getloginData,
-  changeEditSettingAction: changeEditSetting
+  getloginDataAction : getloginData
 };
 
 const mapStateToProps = (state) => {

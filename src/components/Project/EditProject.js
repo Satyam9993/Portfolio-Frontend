@@ -8,7 +8,7 @@ import { v4 } from "uuid";
 import { useEffect } from "react";
 
 const EditProject = ({
-  editPermissionRedux,
+  loginUserRedux,
   UserdataRedux,
   updateUserDataAction,
   showAlert,
@@ -66,7 +66,7 @@ const EditProject = ({
       showAlert("Please Add github url", "danger");
       return;
     }
-    if (selectedFile && editPermissionRedux) {
+    if (selectedFile && (loginUserRedux.loginUserId === UserdataRedux._id)) {
       const imageRef = ref(storage, `images/project/${v4()}`);
       await uploadBytes(imageRef, selectedFile)
         .then((snapshort) => {
@@ -93,7 +93,7 @@ const EditProject = ({
         .catch((err) => {
           showAlert("Something went wrong!", "danger");
         });
-    } else if (editPermissionRedux) {
+    } else if ((loginUserRedux.loginUserId === UserdataRedux._id)) {
       const body = {
         title: formdata.title,
         description: formdata.description,
@@ -130,7 +130,7 @@ const EditProject = ({
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -154,7 +154,7 @@ const EditProject = ({
         </button>
       )}
 
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
         onClick={handleRemove}
         >
@@ -325,7 +325,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

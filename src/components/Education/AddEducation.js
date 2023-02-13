@@ -4,7 +4,7 @@ import { AddEducationInfo } from "../../actions/Education/Education";
 import { updateUserData } from "../../actions/UserData/userdata";
 
 const AddEducation = ({
-  editPermissionRedux,
+  loginUserRedux,
   UserdataRedux,
   updateUserDataAction,
   showAlert
@@ -162,6 +162,7 @@ const AddEducation = ({
         if (res) {
           handleCloseModal();
           await updateUserDataAction(UserdataRedux._id);
+          showAlert("Successfully Added!", "success");
           setCourseName("")
           setStream("")
           setstartYear("")
@@ -170,14 +171,13 @@ const AddEducation = ({
         }
       })
       .catch((error) => {
-        console.log("Satyam ", error);
         showAlert("Something went wrong!", "danger");
       });
   };
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium px-4 my-2 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -390,6 +390,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   return {
     editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

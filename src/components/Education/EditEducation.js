@@ -7,12 +7,13 @@ import {
 import { updateUserData } from "../../actions/UserData/userdata";
 
 const AddEducation = ({
-  editPermissionRedux,
+  loginUserRedux,
   UserdataRedux,
   updateUserDataAction,
   showAlert,
   edu,
 }) => {
+
   const [showModal, setShowModal] = useState(false);
 
   const [startyear, setstartYear] = useState("");
@@ -165,11 +166,11 @@ const AddEducation = ({
       .then(async (res) => {
         if (res) {
           await updateUserDataAction(UserdataRedux._id);
+          showAlert("Successfully Updated", "success");
           handleCloseModal();
         }
       })
       .catch((error) => {
-        // console.log("Satyam ", error);
         showAlert("Something went wrong!", "danger");
       });
   };
@@ -180,6 +181,7 @@ const AddEducation = ({
         .then(async (res) => {
           if (res) {
             await updateUserDataAction(UserdataRedux._id);
+            showAlert("Successfully Removed", "success");
           }
         })
         .catch((err) => {
@@ -201,7 +203,7 @@ const AddEducation = ({
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 rounded-l-lg font-medium px-2 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -225,7 +227,7 @@ const AddEducation = ({
         </button>
       )}
 
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 rounded-r-lg font-medium px-1 py-2 inline-flex space-x-1 items-center"
           onClick={handleRemove}
@@ -436,7 +438,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

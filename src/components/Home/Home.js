@@ -4,7 +4,7 @@ import { editAboutme } from "../../actions/About/About";
 import { updateUserData } from "../../actions/UserData/userdata";
 import UploadPhoto from "./ProfilePhoto";
 
-const Home = ({ UserdataRedux, editPermissionRedux, updateUserDataAction }) => {
+const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
   const [aboutme, setAboutme] = useState({
     headline: "Hi, I am Full Stack Devloper",
     description:
@@ -100,7 +100,7 @@ const Home = ({ UserdataRedux, editPermissionRedux, updateUserDataAction }) => {
               >
                 View Resume
               </div>
-              {editPermissionRedux && (
+              {(loginUserRedux.loginUserId === UserdataRedux._id) && (
                 <button
                   className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
                   onClick={handleShowModal}
@@ -140,7 +140,7 @@ const Home = ({ UserdataRedux, editPermissionRedux, updateUserDataAction }) => {
                   className="rounded-t"
                   src={aboutme.profilephoto || ""}
                 />
-                {editPermissionRedux && (
+                {(loginUserRedux.loginUserId === UserdataRedux._id) && (
                   <button
                     className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
                     onClick={handleShowModal1}
@@ -323,13 +323,12 @@ const Home = ({ UserdataRedux, editPermissionRedux, updateUserDataAction }) => {
 };
 
 const mapDispatchToProps = {
-  // editAboutmeAction : editAboutme,
   updateUserDataAction: updateUserData,
 };
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

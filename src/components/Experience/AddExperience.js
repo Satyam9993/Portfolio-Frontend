@@ -7,7 +7,7 @@ import { AddExperience } from "../../actions/Experience/Experience";
 import { updateUserData } from "../../actions/UserData/userdata";
 
 const EditExperience = ({
-  editPermissionRedux,
+  loginUserRedux,
   UserdataRedux,
   updateUserDataAction,
   showAlert
@@ -53,7 +53,7 @@ const EditExperience = ({
       showAlert("Description is too short", "danger");
       return;
     }
-    if (selectedFile && editPermissionRedux) {
+    if (selectedFile && (loginUserRedux.loginUserId === UserdataRedux._id)) {
       const imageRef = ref(storage, `images/experience/${v4()}`);
       await uploadBytes(imageRef, selectedFile)
         .then((snapshort) => {
@@ -121,7 +121,7 @@ const EditExperience = ({
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium px-4 my-2 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -309,7 +309,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

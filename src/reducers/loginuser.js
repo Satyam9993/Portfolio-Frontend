@@ -1,11 +1,9 @@
 import { 
-  LOGINUSERID,
-  ENABLEEDIT
+  LOGINUSERID
 } from "../actions/type";
 
 const INITIAL_STATE = {
-  LoginUser : {},
-  editPermission: false
+  LoginUser : {}
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -14,11 +12,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         LoginUser: action.payload,
-      };
-    case ENABLEEDIT:
-      return {
-        ...state,
-        editPermission: action.payload,
       };
     default:
       return state;

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { AddSkills } from '../../actions/Skills/Skill'
 import { updateUserData } from "../../actions/UserData/userdata";
 
-const AddSkill = ({ editPermissionRedux, UserdataRedux, updateUserDataAction, showAlert }) => {
+const AddSkill = ({ loginUserRedux, UserdataRedux, updateUserDataAction, showAlert }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
@@ -83,7 +83,7 @@ const AddSkill = ({ editPermissionRedux, UserdataRedux, updateUserDataAction, sh
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium px-4 my-2 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -280,7 +280,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    // editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

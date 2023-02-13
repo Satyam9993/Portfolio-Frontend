@@ -6,7 +6,7 @@ import { storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
-const AddProject = ({ editPermissionRedux, UserdataRedux, updateUserDataAction, showAlert }) => {
+const AddProject = ({ loginUserRedux, UserdataRedux, updateUserDataAction, showAlert }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -52,7 +52,7 @@ const AddProject = ({ editPermissionRedux, UserdataRedux, updateUserDataAction, 
         showAlert("Please Add Project Image", "danger");
         return;
     }
-    if (selectedFile && editPermissionRedux) {
+    if (selectedFile && (loginUserRedux.loginUserId === UserdataRedux._id)) {
         const imageRef = ref(storage, `images/project/${v4()}`);
         await uploadBytes(imageRef, selectedFile)
           .then((snapshort) => {
@@ -91,7 +91,7 @@ const AddProject = ({ editPermissionRedux, UserdataRedux, updateUserDataAction, 
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium px-4 my-2 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -263,7 +263,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

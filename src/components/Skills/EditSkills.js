@@ -4,7 +4,7 @@ import { EditSkills, RemoveSkills } from "../../actions/Skills/Skill";
 import { updateUserData } from "../../actions/UserData/userdata";
 
 const EditSkill = ({
-  editPermissionRedux,
+  loginUserRedux,
   UserdataRedux,
   updateUserDataAction,
   showAlert,
@@ -100,14 +100,14 @@ const EditSkill = ({
             }
           })
           .catch((err) => {
-            // Alert
+            showAlert("Something went wrong!", "danger");
           });
     }
   }
 
   return (
     <>
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-md bg-white hover:text-blue-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
@@ -130,7 +130,7 @@ const EditSkill = ({
           </span>
         </button>
       )}
-      {editPermissionRedux && (
+      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
           className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:text-red-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
             onClick={handleRemove}
@@ -318,7 +318,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
+    loginUserRedux: state?.loginuser?.LoginUser,
     UserdataRedux: state?.Userdata?.User,
   };
 };

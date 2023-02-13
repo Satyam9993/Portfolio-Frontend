@@ -43,15 +43,9 @@ const ExperienceCard = ({ exp, showAlert }) => {
   );
 };
 
-const mapDispatchToProps = {
-  // editAboutmeAction : editAboutme,
-  // updateUserDataAction: updateUserData,
-};
-
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
     UserdataRedux: state?.Userdata?.User,
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ExperienceCard);
+export default connect(mapStateToProps, null)(ExperienceCard);
