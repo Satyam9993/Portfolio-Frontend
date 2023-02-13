@@ -22,10 +22,12 @@ const Index = ({
   loginUserRedux,
   UserdataRedux
 }) => {
+  
   const location = useLocation();
   const [alertShow, setAlertShow] = useState(false)
   const [alerttype, setAlerttype] = useState("warn")
   const [alertmsg, setAlertmsg] = useState("No MSG")
+
   useEffect(() => {
     const userName = location.pathname.slice(3)
     getUserDataByNameAction(userName)
@@ -40,7 +42,7 @@ const Index = ({
         changeEditSettingAction(loginUserRedux.loginUserId === UserdataRedux._id);
       }
     }
-  }, [])
+  }, [loginUserRedux])
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)
