@@ -53,9 +53,9 @@ const Navbar = ({logoutAction, loginUserRedux}) => {
           <Link className="mr-5 hover:text-gray-900" to="#project">Project</Link>
           <Link className="mr-5 hover:text-gray-900" to="#education">Education</Link>
         </nav>
-        {(loggedIn && pathName !== loginUserRedux.loginUserName ) && <a className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mx-3" href={`/v/${loginUserRedux.loginUserName}`}>
+        {(loggedIn && pathName !== loginUserRedux.loginUserName ) && <Link className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mx-3" to={`/v/${loginUserRedux.loginUserName}`}>
           Your Portfolio
-        </a>}
+        </Link>}
         {!loggedIn ?
         <Link className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" to="/login">
           Login

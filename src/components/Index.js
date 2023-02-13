@@ -22,12 +22,10 @@ const Index = ({
   loginUserRedux,
   UserdataRedux
 }) => {
-  
   const location = useLocation();
   const [alertShow, setAlertShow] = useState(false)
   const [alerttype, setAlerttype] = useState("warn")
   const [alertmsg, setAlertmsg] = useState("No MSG")
-
   useEffect(() => {
     const userName = location.pathname.slice(3)
     getUserDataByNameAction(userName)
@@ -38,19 +36,11 @@ const Index = ({
 
   useEffect(() => {
     if(localStorage.getItem('authToken')){
-      if(loginUserRedux.loginUserId && UserdataRedux._id){
-        changeEditSettingAction(loginUserRedux.loginUserId === UserdataRedux._id);
+      if((loginUserRedux.loginUserId === UserdataRedux._id) || (loginUserRedux.loginUserName === UserdataRedux.userName)){
+        changeEditSettingAction((loginUserRedux.loginUserId === UserdataRedux._id) && (loginUserRedux.loginUserName === UserdataRedux.userName));
       }
     }
-  }, [loginUserRedux])
-  
-  useEffect(() => {
-    if(localStorage.getItem('authToken')){
-      if(loginUserRedux.loginUserId && UserdataRedux._id){
-        changeEditSettingAction(loginUserRedux.loginUserId === UserdataRedux._id);
-      }
-    }
-  }, [])
+  }, [loginUserRedux && UserdataRedux])
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)
