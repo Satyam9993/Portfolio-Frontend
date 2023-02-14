@@ -7,7 +7,7 @@ const ContactCard = ({
   contact,
   UserdataRedux,
   updateUserDataAction,
-  editPermissionRedux,
+  loginUserRedux,
   showAlert
 }) => {
   const getTimeAgo = (created) => {
@@ -56,7 +56,7 @@ const ContactCard = ({
             <span className="font-bold">
               {contact.name}
               <span className="mx-5">
-              {editPermissionRedux && (
+              {(loginUserRedux.loginUserId === UserdataRedux._id) && (
                 <button
                   className="text-slate-800 hover:text-blue-600 bg-white rounded-r-lg font-medium px-5 inline-flex space-x-1 items-center"
                   onClick={handleRemove}
@@ -99,8 +99,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    editPermissionRedux: state?.loginuser?.editPermission,
-    UserdataRedux: state?.Userdata?.User,
+    loginUserRedux: state?.loginuser?.LoginUser,
+    UserdataRedux : state?.Userdata?.User
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactCard);
