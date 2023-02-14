@@ -31,7 +31,7 @@ const Education = ({showAlert, UserdataRedux}) => {
           <div className="text-center">
           <AddEducation showAlert={showAlert}/>
           </div>
-          <div className="flex flex-wrap -m-4 my-10">
+          <div className="flex flex-wrap my-10">
             {Educations.map((edu) => {
               return (
                 <EducationCard edu={edu} key={edu._id}/>
