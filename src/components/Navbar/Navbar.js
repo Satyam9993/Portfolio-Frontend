@@ -7,7 +7,7 @@ import store from '../../store'
 
 
 
-const Navbar = ({logoutAction, loginUserRedux}) => {
+const Navbar = ({logoutAction, loginUserRedux, showAlert}) => {
 
   const location = useLocation();
   const [loggedIn, setloggedIn] = useState(false)
@@ -25,6 +25,7 @@ const Navbar = ({logoutAction, loginUserRedux}) => {
     logoutAction();
     localStorage.removeItem('authToken');
     setloggedIn(false);
+    showAlert("Suceessfully Logout!!", "success")
   }
   
   return (

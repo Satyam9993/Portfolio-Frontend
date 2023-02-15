@@ -50,7 +50,7 @@ const Index = ({
       <Alert msg={alertmsg} type={alerttype} setAlertShow={setAlertShow}/>
       }
       </div>
-      <Navbar />
+      <Navbar showAlert={showAlert}/>
       <Hero />
       <Skill  showAlert={showAlert}/>
       <Project showAlert={showAlert}/>

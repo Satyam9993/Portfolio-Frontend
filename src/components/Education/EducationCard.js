@@ -3,7 +3,7 @@ import EditEducation from "./EditEducation";
 
 const EducationCard = ({edu}) => {
   return (
-    <div className="p-4 lg:w-1/2">
+    <div className="p-4 lg:w-1/2" style={{minWidth:"15rem"}}>
       <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
         <img
           alt="team"

@@ -390,7 +390,7 @@ const AddEducation = ({
                   </div>
                   <div className="p-2 w-full">
                     <button
-                      className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
+                      className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
                       onClick={handleSave}
                     >
                       <span>
@@ -408,7 +408,7 @@ const AddEducation = ({
                       <span>Save Edit</span>
                     </button>
                     <button
-                      className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
+                      className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
                       onClick={handleCloseModal}
                     >
                       <span>
