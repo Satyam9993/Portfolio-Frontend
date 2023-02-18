@@ -37,11 +37,10 @@ const Home = ({
           handleCloseModal();
           await updateUserDataAction(UserdataRedux._id);
           showAlert("Successfully Edited!!", "success");
-          setIsloading(false);
         }
+        setIsloading(false);
       })
       .catch((err) => {
-        // Alert
         showAlert("Something went wrong!!", "danger");
         setIsloading(false);
       });
@@ -63,9 +62,7 @@ const Home = ({
         Name: UserdataRedux.Name,
         profilephoto: UserdataRedux?.profilephoto || "",
       });
-      if (aboutme.profilephoto) {
-        setIsloading(false);
-      }
+      setIsloading(false);
     }
   }, [UserdataRedux]);
 
