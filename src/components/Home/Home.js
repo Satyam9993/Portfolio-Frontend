@@ -2,21 +2,19 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { editAboutme } from "../../actions/About/About";
 import { updateUserData } from "../../actions/UserData/userdata";
+import Loader from "./Loader";
 import UploadPhoto from "./ProfilePhoto";
 
-const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
-  const [aboutme, setAboutme] = useState({
-    headline: "Hi, I am Full Stack Devloper",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    intoduction:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-    profilephoto:
-      "https://plus.unsplash.com/premium_photo-1673448391254-095fc8adf39a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHBob3RvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    Name: "ABC",
-  });
+const Home = ({
+  UserdataRedux,
+  loginUserRedux,
+  updateUserDataAction,
+  showAlert,
+}) => {
+  const [aboutme, setAboutme] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
+  const [isloading, setIsloading] = useState(true);
   const [formdata, setFormdata] = useState({
     headline: "",
     description: "",
@@ -32,15 +30,20 @@ const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
       description: formdata.description,
       intoduction: formdata.intoduction,
     };
+    setIsloading(true);
     editAboutme(body, UserdataRedux._id)
       .then(async (res) => {
         if (res) {
           handleCloseModal();
           await updateUserDataAction(UserdataRedux._id);
+          showAlert("Successfully Edited!!", "success");
+          setIsloading(false);
         }
       })
       .catch((err) => {
         // Alert
+        showAlert("Something went wrong!!", "danger");
+        setIsloading(false);
       });
   };
 
@@ -51,9 +54,7 @@ const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
         description: UserdataRedux?.aboutme?.description,
         intoduction: UserdataRedux?.aboutme?.intoduction,
         Name: UserdataRedux.Name,
-        profilephoto:
-          UserdataRedux?.profilephoto ||
-          "https://plus.unsplash.com/premium_photo-1673448391254-095fc8adf39a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHBob3RvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        profilephoto: UserdataRedux?.profilephoto,
       });
       setFormdata({
         headline: UserdataRedux?.aboutme?.headline,
@@ -62,6 +63,9 @@ const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
         Name: UserdataRedux.Name,
         profilephoto: UserdataRedux?.profilephoto || "",
       });
+      if (aboutme.profilephoto) {
+        setIsloading(false);
+      }
     }
   }, [UserdataRedux]);
 
@@ -86,64 +90,25 @@ const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
 
   return (
     <div id="home">
-      <div className="m-auto max-w-6xl p-12">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/2 max-w-md flex flex-col justify-center">
-            <div className="md:text-5xl text-2xl uppercase font-black">
-              {aboutme.headline}
-            </div>
-            <div className="text-xl mt-4">{aboutme.description}</div>
-            <div className="my-5 h-16">
-              <div
-                className="shadow-md font-medium py-2 px-4 text-blue-100
-                    cursor-pointer bg-blue-600 hover:bg-blue-500 rounded text-lg text-center w-48"
-              >
-                View Resume
+      {!isloading ? (
+        <div className="m-auto max-w-6xl p-12">
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-1/2 max-w-md flex flex-col justify-center">
+              <div className="md:text-5xl text-2xl uppercase font-black">
+                {aboutme.headline}
               </div>
-              {(loginUserRedux.loginUserId === UserdataRedux._id) && (
-                <button
-                  className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
-                  onClick={handleShowModal}
+              <div className="text-xl mt-4">{aboutme.description}</div>
+              <div className="my-5 h-16">
+                <div
+                  className="shadow-md font-medium py-2 px-4 text-blue-100
+                    cursor-pointer bg-blue-600 hover:bg-blue-500 rounded text-lg text-center w-48"
                 >
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                      />
-                    </svg>
-                  </span>
-                  <span>Edit</span>
-                </button>
-              )}
-            </div>
-          </div>
-          <div className="flex md:justify-end w-full md:w-1/2 -mt-5">
-            <div
-              style={{
-                backgroundImage:
-                  "https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5dea7a12bb83ab1f13040de5_cx-dots.svg",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <div className="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
-                <img
-                  alt="card img"
-                  className="rounded-t"
-                  src={aboutme.profilephoto || ""}
-                />
-                {(loginUserRedux.loginUserId === UserdataRedux._id) && (
+                  View Resume
+                </div>
+                {loginUserRedux.loginUserId === UserdataRedux._id && (
                   <button
                     className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
-                    onClick={handleShowModal1}
+                    onClick={handleShowModal}
                   >
                     <span>
                       <svg
@@ -161,20 +126,63 @@ const Home = ({ UserdataRedux, loginUserRedux, updateUserDataAction }) => {
                         />
                       </svg>
                     </span>
-                    <span>Edit Profile photo</span>
+                    <span>Edit</span>
                   </button>
                 )}
-                <div className="text-2xl p-10 bg-white">
-                  {aboutme.intoduction}
-                  <p className="text-center text-sm bg-white py-3 font-medium">
-                    "{aboutme.Name}"
-                  </p>
+              </div>
+            </div>
+            <div className="flex md:justify-end w-full md:w-1/2 -mt-5">
+              <div
+                style={{
+                  backgroundImage:
+                    "https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5dea7a12bb83ab1f13040de5_cx-dots.svg",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
+                  <img
+                    alt="card img"
+                    className="rounded-t"
+                    src={aboutme.profilephoto || ""}
+                  />
+                  {loginUserRedux.loginUserId === UserdataRedux._id && (
+                    <button
+                      className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
+                      onClick={handleShowModal1}
+                    >
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                          />
+                        </svg>
+                      </span>
+                      <span>Edit Profile photo</span>
+                    </button>
+                  )}
+                  <div className="text-2xl p-10 bg-white">
+                    {aboutme.intoduction}
+                    <p className="text-center text-sm bg-white py-3 font-medium">
+                      "{aboutme.Name}"
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <Loader />
+      )}
       <div>
         {/* Modal Form */}
 

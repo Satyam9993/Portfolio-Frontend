@@ -17,10 +17,7 @@ import {getloginData} from '../actions/Auth/Auth'
 
 const Index = ({
   getUserDataByNameAction,
-  getloginDataAction,
-  changeEditSettingAction,
-  loginUserRedux,
-  UserdataRedux
+  getloginDataAction
 }) => {
   const location = useLocation();
   const [alertShow, setAlertShow] = useState(false)
@@ -51,7 +48,7 @@ const Index = ({
       }
       </div>
       <Navbar showAlert={showAlert}/>
-      <Hero />
+      <Hero showAlert={showAlert}/>
       <Skill  showAlert={showAlert}/>
       <Project showAlert={showAlert}/>
       <Experience showAlert={showAlert}/>
