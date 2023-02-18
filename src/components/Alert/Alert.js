@@ -18,9 +18,9 @@ const Alert = ({ msg, type, setAlertShow }) => {
     <>
       <div
         id="alert-3"
-        className={`flex p-4 mb-4 text-${color}-800 rounded-lg bg-${color}-50 dark:text-${color}-400 my-3`}
+        className={`flex fixed p-4 text-${color}-800 rounded-sm bg-${color}-50 dark:text-${color}-400 my-3`}
         role="alert"
-        style={{position:"fixed", marginLeft: "38%", zIndex:10}}
+        style={{left : "38%"}}
       >
         <svg
           aria-hidden="true"
