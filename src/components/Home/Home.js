@@ -4,6 +4,7 @@ import { editAboutme } from "../../actions/About/About";
 import { updateUserData } from "../../actions/UserData/userdata";
 import Loader from "./Loader";
 import UploadPhoto from "./ProfilePhoto";
+import './Home.css'
 
 const Home = ({
   UserdataRedux,
@@ -62,7 +63,9 @@ const Home = ({
         Name: UserdataRedux.Name,
         profilephoto: UserdataRedux?.profilephoto || "",
       });
-      setIsloading(false);
+      if(aboutme.headline && aboutme.description && aboutme.Name && aboutme.profilephoto){
+        setIsloading(false);
+      }
     }
   }, [UserdataRedux]);
 
@@ -88,7 +91,7 @@ const Home = ({
   return (
     <div id="home">
       {!isloading ? (
-        <div className="m-auto max-w-6xl p-12">
+        <div className="m-auto max-w-6xl p-12 animate-fade-in opacity-0">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 max-w-md flex flex-col justify-center">
               <div className="md:text-5xl text-2xl uppercase font-black">
@@ -139,8 +142,8 @@ const Home = ({
                 <div className="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
                   <img
                     alt="card img"
-                    className="rounded-t"
-                    src={aboutme.profilephoto || ""}
+                    className="rounded-t h-max w-full"
+                    src={aboutme.profilephoto}
                   />
                   {loginUserRedux.loginUserId === UserdataRedux._id && (
                     <button
