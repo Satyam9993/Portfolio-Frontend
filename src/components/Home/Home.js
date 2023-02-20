@@ -50,20 +50,20 @@ const Home = ({
   useEffect(() => {
     if (UserdataRedux) {
       setAboutme({
-        headline: UserdataRedux.aboutme.headline,
-        description: UserdataRedux.aboutme.description,
-        intoduction: UserdataRedux.aboutme.intoduction,
+        headline: UserdataRedux?.aboutme?.headline,
+        description: UserdataRedux?.aboutme?.description,
+        intoduction: UserdataRedux?.aboutme?.intoduction,
         Name: UserdataRedux.Name,
-        profilephoto: UserdataRedux.profilephoto,
+        profilephoto: UserdataRedux?.profilephoto,
       });
       setFormdata({
-        headline: UserdataRedux.aboutme.headline,
-        description: UserdataRedux.aboutme.description,
-        intoduction: UserdataRedux.aboutme.intoduction,
+        headline: UserdataRedux?.aboutme?.headline,
+        description: UserdataRedux?.aboutme?.description,
+        intoduction: UserdataRedux?.aboutme?.intoduction,
         Name: UserdataRedux.Name,
         profilephoto: UserdataRedux?.profilephoto || "",
       });
-      if(aboutme.headline && aboutme.description && aboutme.Name){
+      if(aboutme.headline){
         setIsloading(false);
       }
     }
