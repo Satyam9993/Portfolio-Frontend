@@ -63,9 +63,11 @@ const Home = ({
         Name: UserdataRedux.Name,
         profilephoto: UserdataRedux?.profilephoto || "",
       });
-      if(aboutme.headline){
-        setIsloading(false);
-      }
+      console.log("Satyam ", aboutme);
+      // if(aboutme.headline){
+      //   setIsloading(false);
+      // }
+      setIsloading(false);
     }
   }, [UserdataRedux]);
 
