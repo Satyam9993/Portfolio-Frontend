@@ -67,9 +67,18 @@ const Home = ({
       // if(aboutme.headline){
       //   setIsloading(false);
       // }
-      setIsloading(false);
+      // setIsloading(false);
     }
   }, [UserdataRedux]);
+
+  useEffect(() => {
+    if(aboutme?.headline && aboutme.description && aboutme.profilephoto && aboutme.Name){
+      setIsloading(false);
+    }
+    
+  }, [aboutme])
+  
+
 
   const handleonChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
