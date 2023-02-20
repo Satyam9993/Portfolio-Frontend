@@ -48,7 +48,7 @@ const Home = ({
   };
 
   useEffect(() => {
-    if (UserdataRedux) {
+    if (UserdataRedux?.aboutme) {
       setAboutme({
         headline: UserdataRedux?.aboutme?.headline,
         description: UserdataRedux?.aboutme?.description,
