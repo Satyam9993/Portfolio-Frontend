@@ -7,22 +7,22 @@ import {
 import ErrorPage from "./error-page";
 import Signin from './components/Auth/Signin'
 import Login from "./components/Auth/Login";
-import ContactMsg from "./components/Contact/ContactMsg";
+
 const router = createBrowserRouter([
   {
     path: "v/:username",
     element: <Index/>,
-    // errorElement: <ErrorPage />
+    errorElement: <ErrorPage />
   },
   {
     path: "/signin",
     element: <Signin/>,
-    // errorElement: <ErrorPage />
+    errorElement: <ErrorPage />
   },
   {
     path: "/login",
     element: <Login/>,
-    // errorElement: <ErrorPage />
+    errorElement: <ErrorPage />
   }
 ]);
 
