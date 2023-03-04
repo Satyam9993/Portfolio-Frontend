@@ -6,11 +6,10 @@ import Skill from "./Skills/Skill";
 import Project from "./Project/Project";
 import Education from "./Education/Education";
 import Contact from "./Contact/Contact";
-import { useLocation } from 'react-router-dom';
 import Alert from "./Alert/Alert";
 import { useState } from "react";
 import { connect } from "react-redux";
-
+import { useParams } from 'react-router-dom';
 import {getUserDataByName} from '../actions/UserData/userdata'
 import {getloginData} from '../actions/Auth/Auth'
 
@@ -19,17 +18,17 @@ const Index = ({
   getUserDataByNameAction,
   getloginDataAction
 }) => {
-  const location = useLocation();
   const [alertShow, setAlertShow] = useState(false)
   const [alerttype, setAlerttype] = useState("warn")
   const [alertmsg, setAlertmsg] = useState("No MSG")
+  const { username } = useParams();
+  
   useEffect(() => {
-    const userName = location.pathname.slice(3)
-    getUserDataByNameAction(userName)
+    getUserDataByNameAction(username)
     if(localStorage.getItem('authToken')){
-      getloginDataAction()
+      getloginDataAction();
     }
-  }, [])
+  }, []) //eslint-disable-line
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)

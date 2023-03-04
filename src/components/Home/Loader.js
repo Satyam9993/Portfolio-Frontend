@@ -8,7 +8,7 @@ import {
 const Loader = () => {
   return (
     <div className="items-center">
-      <div className="m-auto max-w-6xl p-12">
+      <div className="m-auto max-w-6xl p-12 sm:p-0 sm:m-0">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/2 max-w-md flex flex-col justify-center">
             <div className="md:text-5xl text-2xl uppercase font-black">

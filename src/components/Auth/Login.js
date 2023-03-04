@@ -99,7 +99,7 @@ const Login = (props) => {
               Login
             </button>
             <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">
-              <Link to={'/signin'}>SignIn?</Link>
+              <Link to={'/'}>SignIn?</Link>
             </span>
           </div>
         </div>
