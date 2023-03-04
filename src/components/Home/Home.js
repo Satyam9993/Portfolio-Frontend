@@ -24,7 +24,7 @@ const Home = ({
     Name: "",
   });
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const body = {
       Name: formdata.Name,
       headline: formdata.headline,
@@ -32,7 +32,7 @@ const Home = ({
       intoduction: formdata.intoduction,
     };
     setIsloading(true);
-    editAboutme(body, UserdataRedux._id)
+    await editAboutme(body, UserdataRedux._id)
       .then(async (res) => {
         if (res) {
           handleCloseModal();
@@ -54,12 +54,12 @@ const Home = ({
         description: UserdataRedux?.aboutme?.description,
         intoduction: UserdataRedux?.aboutme?.intoduction,
         Name: UserdataRedux.Name,
-        profilephoto: UserdataRedux?.profilephoto,
+        profilephoto: UserdataRedux?.profilephoto ?  UserdataRedux?.profilephoto:"https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=600",
       });
       setFormdata({
         headline: UserdataRedux?.aboutme?.headline,
         description: UserdataRedux?.aboutme?.description,
-        intoduction: UserdataRedux?.aboutme?.intoduction,
+        intoduction: UserdataRedux?.aboutme?.intoduction, 
         Name: UserdataRedux.Name,
         profilephoto: UserdataRedux?.profilephoto || "",
       });
