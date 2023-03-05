@@ -97,7 +97,7 @@ const Home = ({
   return (
     <div id="home">
       {!isloading ? (
-        <div className="m-auto max-w-6xl p-12 animate-fade-in opacity-0">
+        <div className="m-auto max-w-6xl p-10 animate-fade-in opacity-0">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 max-w-md flex flex-col justify-center">
               <div className="md:text-5xl text-2xl uppercase font-black">
@@ -145,7 +145,7 @@ const Home = ({
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                <div className="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
+                <div className="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-0">
                   <img
                     alt="card img"
                     className="rounded-t h-max w-full"
@@ -175,7 +175,7 @@ const Home = ({
                       <span>Edit Profile photo</span>
                     </button>
                   )}
-                  <div className="text-2xl p-10 bg-white">
+                  <div className="text-2xl md:text-xl p-10 bg-white">
                     {aboutme.intoduction}
                     <p className="text-center text-sm bg-white py-3 font-medium">
                       "{aboutme.Name}"
