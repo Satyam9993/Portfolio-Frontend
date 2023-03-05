@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import EditSkill from "./EditSkills";
 
 const SkillCard = ({ skill }) => {
+
+  const [isEditing, setisEditing] = useState(false);
+
   const [color, setColor] = useState("yellow");
   const generateColor = () => {
     var colorList = [
@@ -32,15 +35,18 @@ const SkillCard = ({ skill }) => {
 
   return (
     <>
-      <div className="p-4 sm:w-1/2 lg:w-1/3 w-full">
-        <div className=" flex items-center justify-between p-4 rounded-lg bg-white shadow-indigo-50 shadow-md">
+      <div
+        className={`p-4 sm:w-full lg:w-1/2 w-full shadow-${color}-100 shadow-md ${!isEditing && "hover:scale-90 duration-300"}`}
+      >
+        <div className="flex justify-between mx-5 p-2">
           <div>
             <a href={skill.certificateurl || "#"} target="_blank">
-            <span className="text-blue-900 text-xl font-bold mx-1">{skill.name}</span>
+              <span className={`text-${color}-500 text-xl font-bold mx-1 hover:text-blue-900`}>
+                {skill.name}
+              </span>
             </a>
-            <EditSkill skill={skill}/>
             <h3
-              className={`mt-2 text-xl font-bold text-${color}-500 text-left`}
+              className={`text-xl sm:text-md font-bold text-center`}
             >
               {skill.level}
             </h3>
@@ -49,18 +55,32 @@ const SkillCard = ({ skill }) => {
             </p>
             <div className="text-sm font-medium">
               <div className="text-gray-700">Start Date:</div>
-              <div className="text-gray-500">{new Date(skill.startDate).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}</div>
-              
+              <div className="text-gray-500">
+                {new Date(skill.startDate).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </div>
             </div>
             <div className="text-sm font-medium mt-2">
-              <div className="text-gray-500">{monthsBetween(new Date(skill.startDate), new Date(skill.endDate))} Months</div>
+              <div className="text-gray-500">
+                {monthsBetween(
+                  new Date(skill.startDate),
+                  new Date(skill.endDate)
+                )}{" "}
+                Months
+              </div>
             </div>
           </div>
-          <div
-            className={`bg-gradient-to-tr from-${color}-500 to-${color}-400 w-32 h-32  rounded-full shadow-2xl shadow-${color}-400 border-white  border-dashed border-2  flex justify-center items-center`}
-          >
-            <div>
-              <h1 className="text-white text-lg font-bold">{skill.name}</h1>
+          <div>
+            <EditSkill skill={skill} setisEditing={setisEditing}/>
+            <div
+              className={`bg-gradient-to-tr from-${color}-500 to-${color}-400 w-32 h-32  rounded-full shadow-2xl shadow-${color}-400 border-white  border-dashed border-2  flex justify-center items-center`}
+            >
+              <div>
+                <h1 className="text-white text-lg font-bold">{skill.name}</h1>
+              </div>
             </div>
           </div>
         </div>

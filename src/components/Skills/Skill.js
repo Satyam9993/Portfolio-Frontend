@@ -11,6 +11,7 @@ const Skill = ({ UserdataRedux, showAlert }) => {
       setSkills(UserdataRedux?.skills);
     }
   }, [UserdataRedux]);
+
   return (
     <div className="my-24" id="skills">
     <div className="text-center">
@@ -23,11 +24,9 @@ const Skill = ({ UserdataRedux, showAlert }) => {
       className="text-gray-600 body-font flex justify-center items-center"
       style={{ margin: "3% 10% 0 10%" }}
     >
-      <div className=" container px-5 py-1 mx-auto">
+      <div className="container py-1 mx-auto">
         <div className="flex flex-wrap -m-4 text-center">
-          {skills.map((skill) => {
-            return <SkillCard key={skill._id} skill={skill}/>;
-          })}
+          {skills.map((skill) => <SkillCard key={skill._id} skill={skill}/>)}
         </div>
       </div>
     </section>

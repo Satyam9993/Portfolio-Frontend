@@ -28,7 +28,7 @@ const Index = ({
     if(localStorage.getItem('authToken')){
       getloginDataAction();
     }
-  }, []) //eslint-disable-line
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)

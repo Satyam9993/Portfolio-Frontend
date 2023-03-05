@@ -9,13 +9,16 @@ const EditSkill = ({
   updateUserDataAction,
   showAlert,
   skill,
+  setisEditing
 }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
+    setisEditing(true);
     setShowModal(true);
   };
   const handleCloseModal = () => {
+    setisEditing(false);
     setShowModal(false);
   };
 
@@ -109,7 +112,7 @@ const EditSkill = ({
     <>
       {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
-          className="text-slate-800 hover:text-blue-600 text-md bg-white hover:text-blue-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
+          className="text-slate-800 hover:text-blue-600 text-md hover:text-blue-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
           onClick={handleShowModal}
         >
           <span>
@@ -132,7 +135,7 @@ const EditSkill = ({
       )}
       {(loginUserRedux.loginUserId === UserdataRedux._id) && (
         <button
-          className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:text-red-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
+          className="text-slate-800 hover:text-blue-600 text-sm hover:text-red-500 font-medium px-1 py-2 inline-flex space-x-1 items-center"
             onClick={handleRemove}
         >
           <span>
