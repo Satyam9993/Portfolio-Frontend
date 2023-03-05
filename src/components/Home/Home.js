@@ -97,10 +97,10 @@ const Home = ({
   return (
     <div id="home">
       {!isloading ? (
-        <div className="m-auto max-w-6xl p-10 animate-fade-in opacity-0">
+        <div className="m-auto max-w-6xl p-5 animate-fade-in opacity-0">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 max-w-md flex flex-col justify-center">
-              <div className="md:text-5xl text-2xl uppercase font-black">
+              <div className="md:text-5xl text-2xl uppercase font-black animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
                 {aboutme.headline}
               </div>
               <div className="text-xl mt-4">{aboutme.description}</div>
@@ -175,7 +175,7 @@ const Home = ({
                       <span>Edit Profile photo</span>
                     </button>
                   )}
-                  <div className="text-2xl md:text-xl p-10 bg-white">
+                  <div className="text-2xl md:text-xl p-5 bg-white">
                     {aboutme.intoduction}
                     <p className="text-center text-sm bg-white py-3 font-medium">
                       "{aboutme.Name}"
