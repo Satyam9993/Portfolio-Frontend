@@ -18,11 +18,6 @@ const Project = ({ UserdataRedux, showAlert }) => {
         <h1 className="text-2xl font-semibold text-center text-gray-900 capitalize lg:text-3xl">
           Projects
         </h1>
-
-        <p className="mt-4 text-center text-gray-500">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam
-          voluptatibus
-        </p>
         <div className="flex justify-center">
           <AddProject showAlert={showAlert} />
         </div>
