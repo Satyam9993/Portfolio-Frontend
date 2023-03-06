@@ -4,50 +4,41 @@ import EditProject from "./EditProject";
 
 const ProjectCard = ({ project, showAlert }) => {
   return (
-    <div className="w-full md:w-1/2 xl:w-1/3 px-4">
-      <div className="bg-white rounded-lg overflow-hidden mb-10">
-        <img src={project.imageurl} alt="image" className="w-full" />
-        <div className="p-8 sm:p-9 md:p-7 xl:p-9 text-center">
-          <div className="inline-flex items-center rounded-md shadow-sm">
-            <EditProject project={project} showAlert={showAlert}/>
-          </div>
-          <h3>
+    <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-2">
+      <div
+        className="overflow-hidden bg-cover rounded-lg cursor-pointer h-96 group shadow-lg"
+        style={{
+          backgroundImage: `url(${project.imageurl})`,
+        }}
+      >
+        <EditProject project={project} showAlert={showAlert} />
+        <div className="flex flex-col justify-center w-full h-full px-10 py-4 transition-opacity duration-700 opacity-0 backdrop-blur-sm bg-gray-800/60 group-hover:opacity-100">
+          <div className="flex justify-between">
             <a
-              href={project.projecturl}
-              className="
-                        font-semibold
-                        text-dark text-xl
-                        sm:text-[22px]
-                        md:text-xl
-                        lg:text-[22px]
-                        xl:text-xl
-                        2xl:text-[22px]
-                        mb-4
-                        block
-                        hover:text-primary
-                        "
+              className="text-2xl font-semibold text-white capitalize my-2"
+              rel="noreferrer"
               target="_blank"
+              href={project.projecturl}
             >
               {project.title}
             </a>
-          </h3>
-          <p className="text-base text-body-color leading-relaxed mb-7">
+          </div>
+          <p className="text-base text-white text-body-color leading-relaxed mb-7">
             {project.description}
           </p>
-          <a
-            href={project.githuburl}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            target="_blank"
-          >
-            View GitHub
-          </a>
-          <a
-            href={project.projecturl}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            target="_blank"
-          >
-            View Project
-          </a>
+          <div className="mx-14 flex justify-between">
+            <a
+              className="mt-2 text-lg tracking-wider text-blue-400 uppercase"
+              href={project.projecturl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Website
+            </a>
+            <p className="mt-2 text-lg tracking-wider text-blue-400 uppercase ">
+              GitHub
+            </p>
+          </div>
         </div>
       </div>
     </div>

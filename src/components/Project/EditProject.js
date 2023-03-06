@@ -66,7 +66,7 @@ const EditProject = ({
       showAlert("Please Add github url", "danger");
       return;
     }
-    if (selectedFile && (loginUserRedux.loginUserId === UserdataRedux._id)) {
+    if (selectedFile && loginUserRedux.loginUserId === UserdataRedux._id) {
       const imageRef = ref(storage, `images/project/${v4()}`);
       await uploadBytes(imageRef, selectedFile)
         .then((snapshort) => {
@@ -93,13 +93,13 @@ const EditProject = ({
         .catch((err) => {
           showAlert("Something went wrong!", "danger");
         });
-    } else if ((loginUserRedux.loginUserId === UserdataRedux._id)) {
+    } else if (loginUserRedux.loginUserId === UserdataRedux._id) {
       const body = {
         title: formdata.title,
         description: formdata.description,
         githuburl: formdata.githuburl,
         projecturl: formdata.projecturl,
-        imageurl: project.imageurl
+        imageurl: project.imageurl,
       };
       EditSkills(body, project._id)
         .then(async (res) => {
@@ -114,25 +114,25 @@ const EditProject = ({
     }
   };
 
-  const handleRemove = () =>{
-    if(window.confirm("Are you sure?")){
-        RemoveProject(project._id)
-          .then(async (res) => {
-            if (res) {
-              await updateUserDataAction(UserdataRedux._id);
-            }
-          })
-          .catch((err) => {
-            showAlert("Some thing went wrong!!", "danger")
-          });
+  const handleRemove = () => {
+    if (window.confirm("Are you sure?")) {
+      RemoveProject(project._id)
+        .then(async (res) => {
+          if (res) {
+            await updateUserDataAction(UserdataRedux._id);
+          }
+        })
+        .catch((err) => {
+          showAlert("Some thing went wrong!!", "danger");
+        });
     }
-  }
+  };
 
   return (
     <>
-      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
+      {loginUserRedux.loginUserId === UserdataRedux._id && (
         <button
-          className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
+          className="text-slate-800 hover:text-blue-600 text-sm font-medium py-2 inline-flex items-center"
           onClick={handleShowModal}
         >
           <span>
@@ -154,9 +154,10 @@ const EditProject = ({
         </button>
       )}
 
-      {(loginUserRedux.loginUserId === UserdataRedux._id) && (
-        <button className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
-        onClick={handleRemove}
+      {loginUserRedux.loginUserId === UserdataRedux._id && (
+        <button
+          className="text-slate-800 text-sm bg-white font-medium px-2 py-2 inline-flex items-center bg-transparent"
+          onClick={handleRemove}
         >
           <span>
             <svg
@@ -177,7 +178,7 @@ const EditProject = ({
         </button>
       )}
       {showModal && (
-        <div className="modal fixed w-full h-full top-0 left-0 flex items-center justify-center">
+        <div className="modal fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
           <div
             className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
             onClick={handleCloseModal}

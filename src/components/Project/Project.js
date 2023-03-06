@@ -3,36 +3,38 @@ import { connect } from "react-redux";
 import AddProject from "./AddProject";
 import ProjectCard from "./ProjectCard";
 
-const Project = ({UserdataRedux, showAlert}) => {
+const Project = ({ UserdataRedux, showAlert }) => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    if(UserdataRedux.projects){
-      setProjects(UserdataRedux?.projects)
+    if (UserdataRedux.projects) {
+      setProjects(UserdataRedux?.projects);
     }
-  }, [UserdataRedux])
-  
+  }, [UserdataRedux]);
 
   return (
-    <section
-      className="pt-20 lg:pt-[120px] pb-10 lg:pb-20"
-      style={{ margin: "0 10% 0 10%" }}
-      id="project"
-    >
-      <div className="container">
-        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center my-10">
+    <section className="bg-white" style={{ margin: "0 5% 0 5%" }}>
+      <div className="container px-6 py-10 mx-auto">
+        <h1 className="text-2xl font-semibold text-center text-gray-900 capitalize lg:text-3xl">
           Projects
         </h1>
-        <div className="text-center my-5">
-        <AddProject showAlert={showAlert}/>
+
+        <p className="mt-4 text-center text-gray-500">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam
+          voluptatibus
+        </p>
+        <div className="flex justify-center">
+          <AddProject showAlert={showAlert} />
         </div>
-        <div className="flex flex-wrap -mx-4">
-          
-            {projects.map((project)=>{
-              return <ProjectCard project={project} showAlert={showAlert} key={project._id}/>;
-            }
-            )}
-        </div>
+        {projects.map((project) => {
+          return (
+            <ProjectCard
+              project={project}
+              showAlert={showAlert}
+              key={project._id}
+            />
+          );
+        })}
       </div>
     </section>
   );
@@ -41,7 +43,7 @@ const Project = ({UserdataRedux, showAlert}) => {
 const mapStateToProps = (state) => {
   return {
     loginUserRedux: state?.loginuser?.LoginUser,
-    UserdataRedux : state?.Userdata?.User
+    UserdataRedux: state?.Userdata?.User,
   };
 };
 export default connect(mapStateToProps, null)(Project);
