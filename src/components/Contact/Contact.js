@@ -7,7 +7,7 @@ const Contact = ({ loginUserRedux,UserdataRedux, showAlert }) => {
   return (
     <div style={{ margin: "0 10% 0 10%" }} id="contact">
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-10 mx-auto">
+        <div className="container px-5 mx-auto">
           <div className="flex flex-col text-center w-full mb-8">
             {(loginUserRedux.loginUserId === UserdataRedux._id) && <h1 className="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">
               Contact Massage
