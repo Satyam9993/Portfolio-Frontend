@@ -21,15 +21,17 @@ const Project = ({ UserdataRedux, showAlert }) => {
         <div className="flex justify-center">
           <AddProject showAlert={showAlert} />
         </div>
-        {projects.map((project) => {
-          return (
-            <ProjectCard
-              project={project}
-              showAlert={showAlert}
-              key={project._id}
-            />
-          );
-        })}
+        <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-2">
+          {projects.map((project) => {
+            return (
+              <ProjectCard
+                project={project}
+                showAlert={showAlert}
+                key={project._id}
+              />
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -4,8 +4,7 @@ import EditProject from "./EditProject";
 
 const ProjectCard = ({ project, showAlert }) => {
   return (
-    <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-2">
-      <div
+    <div
         className="overflow-hidden bg-cover rounded-lg cursor-pointer h-96 group shadow-lg"
         style={{
           backgroundImage: `url(${project.imageurl})`,
@@ -41,7 +40,6 @@ const ProjectCard = ({ project, showAlert }) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
