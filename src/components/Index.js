@@ -21,10 +21,10 @@ const Index = ({
   const [alertShow, setAlertShow] = useState(false)
   const [alerttype, setAlerttype] = useState("warn")
   const [alertmsg, setAlertmsg] = useState("No MSG")
-  const { username } = useParams();
+  const { userId } = useParams();
   
   useEffect(() => {
-    getUserDataByNameAction(username)
+    getUserDataByNameAction(userId)
     if(localStorage.getItem('authToken')){
       getloginDataAction();
     }

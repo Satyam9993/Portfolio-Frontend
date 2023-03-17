@@ -17,7 +17,7 @@ const Login = (props) => {
       const body = logincrudentional;
       props.loginAction(body).then((res)=>{
         localStorage.setItem("authToken", res.data.authToken)
-        navigate(`/v/${res.data.userName}`);
+        navigate(`/v/${res.data.userId}`);
       }).catch((err)=>{
         console.log("Error", err);
       })

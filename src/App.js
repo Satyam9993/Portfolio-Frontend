@@ -10,7 +10,7 @@ import Login from "./components/Auth/Login";
 
 const router = createBrowserRouter([
   {
-    path: "v/:username",
+    path: "v/:userId",
     element: <Index/>,
     errorElement: <ErrorPage />
   },

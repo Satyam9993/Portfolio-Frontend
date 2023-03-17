@@ -50,7 +50,7 @@ const Login = ({VerifyOtpActionR}) => {
     }
     VerifyOtpActionR(body).then((res)=>{
       localStorage.setItem("authToken", res.data.authToken)
-      navigate(`/v/${res.data.userName}`);
+      navigate(`/v/${res.data.userId}`);
     }).catch((err)=>{
       console.log("Error");
     })
