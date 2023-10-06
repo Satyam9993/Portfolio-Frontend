@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {storage} from '../../firebase'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
-import {v4} from 'uuid'
 import { editProfilePhoto } from "../../actions/About/About";
 import { updateUserData } from "../../actions/UserData/userdata";
 import { connect } from "react-redux";

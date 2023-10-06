@@ -10,8 +10,8 @@ import Alert from "./Alert/Alert";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from 'react-router-dom';
-import {getUserDataByName} from '../actions/UserData/userdata'
-import {getloginData} from '../actions/Auth/Auth'
+import {getUserDataByName} from '../actions/UserData/userdata';
+import {getloginData} from '../actions/Auth/Auth';
 
 
 const Index = ({
@@ -28,7 +28,7 @@ const Index = ({
     if(localStorage.getItem('authToken')){
       getloginDataAction();
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []) // eslint-disable-line
 
   const showAlert=(msg, type)=>{
     setAlerttype(type)
